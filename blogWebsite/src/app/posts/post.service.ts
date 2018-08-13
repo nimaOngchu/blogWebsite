@@ -4,13 +4,14 @@ import { AngularFirestore,
          AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Post } from './post';
 import { map } from 'rxjs/operators';
+import { AngularFireStorage } from '../../../node_modules/angularfire2/storage';
 @Injectable()
 export class PostService {
 postsCollection: AngularFirestoreCollection<Post>;
 postDoc: AngularFirestoreDocument<Post>;
-  constructor(private afs: AngularFirestore) {
-    this.postsCollection = this.afs.collection('posts', ref =>
-  ref.orderBy('published', 'desc'));
+  constructor(private afs: AngularFirestore, private sotage: AngularFireStorage) {
+                  this.postsCollection = this.afs.collection('posts', ref =>
+                  ref.orderBy('published', 'desc'));
    }
 
    getPosts() {

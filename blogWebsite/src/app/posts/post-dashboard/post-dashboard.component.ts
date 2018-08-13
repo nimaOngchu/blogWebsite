@@ -15,7 +15,7 @@ export class PostDashboardComponent implements OnInit {
   content: string;
 
   buttonText = 'Create Post';
-
+  filePath: string;
   uploadPercentage: Observable<number>;
   downloadURL: Observable<string | null>;
 
@@ -33,6 +33,7 @@ export class PostDashboardComponent implements OnInit {
       content: this.content,
       image: this.image,
       title: this.title,
+      imagePath: this.filePath,
       published: new Date()
     };
     this.postService.create(data);
@@ -43,12 +44,12 @@ export class PostDashboardComponent implements OnInit {
   }
   uploadImage(event) {
     const file = event.target.files[0];
-    const path = `ts/${file.name}`;
-    const task = this.storage.upload(path, file);
+    this.filePath = `posts/${file.name}`;
+    const task = this.storage.upload(this.filePath, file);
     this.uploadPercentage = task.percentageChanges();
     task.then(() => {
-      const fileRef = this.storage.ref(path);
-      const url = fileRef.getDownloadURL().subscribe(imageUrl => {
+      const fileRef = this.storage.ref(this.filePath);
+       fileRef.getDownloadURL().subscribe(imageUrl => {
         this.image = imageUrl;
       });
     });

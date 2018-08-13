@@ -6,5 +6,6 @@ export class Post {
     content: string;
     image: string;
     published: Date;
+    imagePath: string;
 
 }
