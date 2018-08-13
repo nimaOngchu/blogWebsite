@@ -1,6 +1,20 @@
-<div *ngIf="post">
-  <h3>{{post.title}}</h3>
-<p>Posted by {{post.author}} &bull; {{post.published.toDate() | date: 'fullDate'}}</p>
-<p>{{post.content}}</p>
-</div>
-
+<section>
+  <mat-card *ngIf="post">
+    <mat-card-title style="text-transform: capitalize;">{{post.title}}</mat-card-title>
+    <mat-card-subtitle>Posted by {{post.author}} &bull; {{post.published.toDate() | date: 'fullDate'}}</mat-card-subtitle>
+    <hr>
+    <br>
+    <img src="{{post.image}}">
+    <br>
+    <br>
+    <mat-card-content>{{post.content}}</mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button (click)="edit(post.id)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="delete(post.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</section>
