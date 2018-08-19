@@ -5,6 +5,7 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostService } from './post.service';
 import { SharedModule } from '../shared/shared.module';
+import { CommentsService } from './comments.service';
 
 
 const routes: Routes = [
@@ -19,6 +20,6 @@ const routes: Routes = [
     SharedModule,
   RouterModule.forChild(routes)],
   declarations: [PostDashboardComponent, PostDetailComponent, PostListComponent],
-  providers: [ PostService]
+  providers: [ PostService, CommentsService]
 })
 export class PostsModule { }

@@ -4,12 +4,13 @@ import { AngularFirestore,
          AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Post } from './post';
 import { map } from 'rxjs/operators';
-import { AngularFireStorage } from '../../../node_modules/angularfire2/storage';
+import { AngularFireStorage } from 'angularfire2/storage';
+import * as firebase from 'firebase/app';
 @Injectable()
 export class PostService {
 postsCollection: AngularFirestoreCollection<Post>;
 postDoc: AngularFirestoreDocument<Post>;
-  constructor(private afs: AngularFirestore, private sotage: AngularFireStorage) {
+  constructor(private afs: AngularFirestore, private storage: AngularFireStorage) {
                   this.postsCollection = this.afs.collection('posts', ref =>
                   ref.orderBy('published', 'desc'));
    }
@@ -35,8 +36,10 @@ postDoc: AngularFirestoreDocument<Post>;
    create (data: Post) {
     this.postsCollection.add(data);
    }
-   delete (id: string) {
-     return this.getPost(id).delete();
+   delete (id: string, imgUrl: string) {
+    const imgRef = firebase.storage().refFromURL(imgUrl);
+    imgRef.delete();
+    this.getPost(id).delete();
    }
    update (id: string, formData) {
     return this.getPost(id).update(formData);

@@ -1,6 +1,6 @@
 <mat-toolbar color='primary'>
   <mat-toolbar-row>
-    <span style='cursor: pointer' routerLink ='/blog'>ng-blog</span>
+    <span style='cursor: pointer' routerLink ='/blog'>Simple Blog</span>
     <span class="spacer"></span>
     <div *ngIf="auth.afAuth.authState | async as user; else showLogin">
       <!-- <span mat-card-avatar>Hello {{user.displayName}}</span>

@@ -1,20 +1,69 @@
-<section>
+<section *ngIf="!allowEdit">
   <mat-card *ngIf="post">
     <mat-card-title style="text-transform: capitalize;">{{post.title}}</mat-card-title>
-    <mat-card-subtitle>Posted by {{post.author}} &bull; {{post.published.toDate() | date: 'fullDate'}}</mat-card-subtitle>
+    <mat-card-subtitle style="color: rgb(184, 123, 32)">Posted by {{post.author}} &bull; {{ post.published.toDate() | date: 'fullDate'}}</mat-card-subtitle>
     <hr>
     <br>
     <img src="{{post.image}}">
     <br>
     <br>
     <mat-card-content>{{post.content}}</mat-card-content>
-    <mat-card-actions>
-      <button mat-icon-button (click)="edit(post.id)">
+    <mat-card-actions *ngIf="auth.CurrentUserId === post.authorId">
+      <button mat-icon-button (click)="editPost()">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button (click)="delete(post.id)">
+      <button mat-icon-button (click)="deletePost(post.id, post.image)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-card-actions>
+    <Br>
+      <mat-list>
+          <h3 mat-subheader>Comments</h3>
+          <mat-list-item *ngFor="let comment of displayComment">
+            <img matListAvatar src="{{comment.authorImage}} " alt="{{comment.author}}">
+            <h3 mat-line>{{comment.author}}</h3>
+            <p mat-line> {{comment.content}} </p>
+            <h4 mat-line>{{comment.date.toDate() | date: 'medium'}}</h4>
+            <hr>
+          </mat-list-item>
+        </mat-list>
+        <section>
+            <mat-form-field appearance="outline">
+                <mat-label>Post a Comment</mat-label>
+                <textarea matInput placeholder="Comment" [(ngModel)]="comment"></textarea>
+              </mat-form-field>
+              <mat-card-actions>
+                <button mat-button (click)="cancelComment()">Cancel</button>
+                <button mat-raised-button color='accent' (click)="postComment()">Comment</button>
+              </mat-card-actions>
+        </section>
   </mat-card>
+ 
+
+</section>
+
+<!-- Edit Section of the page -->
+<section *ngIf="allowEdit">
+  <mat-card>
+    <div>
+      <input type="file" name="file" id="file" (change)="uploadImage($event)">
+      <div [hidden]="!uploadPercentage">
+        <mat-progress-bar mode="determinate" value="{{uploadPercentage | async}}"></mat-progress-bar>
+      </div>
+      <div [hidden]="!image">
+        <img [src]="image || '//:0' ">
+      </div>
+    </div>
+    <mat-form-field>
+      <input matInput placeholder="title" [(ngModel)]="title">
+
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <textarea matInput placeholder="Write Content" [(ngModel)]="content" rows="10"></textarea>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="accent" (click)="createPpost()" [disabled]="!title || !content">{{buttonText}}</button>
+  </mat-card>
+
 </section>

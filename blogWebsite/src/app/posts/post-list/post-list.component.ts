@@ -10,14 +10,14 @@ import { AuthService } from '../../core/auth.service';
 })
 export class PostListComponent implements OnInit {
   posts: Observable<Post[]>;
+  authorPost: Post[];
   constructor( private postsService: PostService, public auth: AuthService) { }
 
   ngOnInit() {
     this.posts = this.postsService.getPosts();
-    console.log(this);
   }
-  delete(id: string) {
-    this.postsService.delete(id);
+  delete(id: string, imgUrl: string) {
+    this.postsService.delete(id, imgUrl);
   }
 
 }

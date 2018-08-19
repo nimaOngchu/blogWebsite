@@ -7,5 +7,4 @@ export class Post {
     image: string;
     published: Date;
     imagePath: string;
-
 }

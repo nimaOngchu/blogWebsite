@@ -14,7 +14,6 @@ export class PostDashboardComponent implements OnInit {
   title: string;
   image: string;
   content: string;
-
   buttonText = 'Create Post';
   filePath: string;
   uploadPercentage: Observable<number>;
@@ -42,6 +41,7 @@ export class PostDashboardComponent implements OnInit {
     this.postService.create(data);
     this.title = '';
     this.content = '';
+
     this.buttonText = 'Post Created!';
     setTimeout(() => (this.buttonText = 'Create Post'), 3000);
     this.route.navigateByUrl('');
