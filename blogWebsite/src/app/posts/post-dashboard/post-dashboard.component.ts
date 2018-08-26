@@ -24,7 +24,6 @@ export class PostDashboardComponent implements OnInit {
     private postService: PostService,
     private storage: AngularFireStorage,
     private route: Router
-
   ) {}
 
   ngOnInit() {}
@@ -48,12 +47,12 @@ export class PostDashboardComponent implements OnInit {
   }
   uploadImage(event) {
     const file = event.target.files[0];
-    this.filePath = `posts/${file.name}`;
+    this.filePath = `posts/${new Date() + file.name}`;
     const task = this.storage.upload(this.filePath, file);
     this.uploadPercentage = task.percentageChanges();
     task.then(() => {
       const fileRef = this.storage.ref(this.filePath);
-       fileRef.getDownloadURL().subscribe(imageUrl => {
+      fileRef.getDownloadURL().subscribe(imageUrl => {
         this.image = imageUrl;
       });
     });

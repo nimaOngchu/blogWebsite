@@ -1,0 +1,33 @@
+<div *ngIf="auth.afAuth.authState | async as user;">
+<mat-card>
+  <mat-card-header>
+
+    <mat-card-title>My Profile</mat-card-title>
+    <mat-card-subtitle> Upload your photo, edit your profile and change password</mat-card-subtitle>
+
+  </mat-card-header>
+  <br>
+  <br>
+  <img src= {{user.photoURL}} alt= {{user.displayName}}
+    class="profile-thumbnail">
+  <div class="profile-name">
+    <h3>{{user.displayName}}</h3>
+  </div>
+  <br><br><hr>
+  <div class="row">
+    <div class="col-xs-3">
+      <strong>Name </strong>
+    </div>
+    <div class="col-xs-2">:</div>
+    <div class="col-xs-6"  [ngStyle]="{'text-transform':'capitalize'}">{{user.displayName}}</div>
+  </div><br>
+  <div class="row">
+      <div class="col-xs-3">
+        <strong>Email </strong>
+      </div>
+      <div class="col-xs-2">:</div>
+      <div class="col-xs-6"> {{user.email}}</div>
+    </div>
+</mat-card>
+</div>
+

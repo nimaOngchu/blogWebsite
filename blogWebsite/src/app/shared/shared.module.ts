@@ -4,21 +4,26 @@ import { MaterialModule } from '../material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '../../../node_modules/@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     MaterialModule,
     NavbarComponent,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
-  declarations: [NavbarComponent]
+  declarations: [NavbarComponent, LoginComponent],
+  entryComponents: [LoginComponent]
 })
 export class SharedModule { }

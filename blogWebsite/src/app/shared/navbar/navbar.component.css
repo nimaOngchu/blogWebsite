@@ -4,3 +4,37 @@
     outline: none;
     border: 0;
 }
+img {
+    margin-right: 5px;
+}
+transformMenu.ng-tns-c111-0.ng-star-inserted.mat-elevation-z2.mat-menu-after.mat-menu-below {
+    margin-top:30px;}
+
+
+    .example-container {
+     
+    height:100%;
+       
+      }
+      
+      .example-sidenav-content {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+      
+      
+      }
+      .mat-drawer {
+        background: #374852;
+        width:150px;
+        
+      }
+      .mat-list .mat-list-item, .mat-nav-list .mat-list-item, .mat-selection-list .mat-list-item{
+          color:white;
+        
+      }
+      .example-sidenav {
+        padding: 20px;
+      }
+     

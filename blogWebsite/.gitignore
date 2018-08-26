@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/public
 
 # dependencies
 /node_modules
@@ -24,6 +25,7 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+
 # misc
 /.sass-cache
 /connect.lock
@@ -39,3 +41,13 @@ testem.log
 Thumbs.db
 /src/environments
  
+ # firebase 
+/.firebase
+firebase.json
+.firebaserc
+firestore.indexes.json
+firestore.rules
+storage.rules
+y
+
+

@@ -11,14 +11,21 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { PostsModule } from './posts/posts.module';
 import { RouterModule, Routes } from '@angular/router';
+import { ProfilePAgeComponent } from './profile-page/profile-page.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 
 const routes: Routes = [
   {path: '', redirectTo: '/blog', pathMatch: 'full'},
+  {path: 'profile', component: ProfilePAgeComponent},
   {path: '', loadChildren: './posts/posts.module#PostsModule'}
 ];
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProfilePAgeComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,13 @@ const routes: Routes = [
     AngularFireStorageModule,
     CoreModule,
     SharedModule,
-    PostsModule
+    PostsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

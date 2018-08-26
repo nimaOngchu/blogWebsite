@@ -1,17 +1,42 @@
-<mat-toolbar color='primary'>
+<mat-toolbar color='primary' >
   <mat-toolbar-row>
-    <span style='cursor: pointer' routerLink ='/blog'>Simple Blog</span>
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <span style='cursor: pointer' routerLink='/blog'>SimpleBlog</span>
     <span class="spacer"></span>
     <div *ngIf="auth.afAuth.authState | async as user; else showLogin">
-      <!-- <span mat-card-avatar>Hello {{user.displayName}}</span>
-      <span>
-        <img [src]="user.photoURL" style='width: 20px;'>
-      </span> -->
-      <button mat-raised-button color='accent' routerLink ='/dashboard'>Write a Post</button>
-      <button mat-button (click)="auth.logout()">Logout</button>
+     
+      <div style="display:inline;">
+        <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">
+          <img [src]="user.photoURL" style='width: 20px;'> Hello {{user.displayName}}
+          <mat-icon *ngIf="!menu1.hidden; else up" class="material-icons">keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before" [overlapTrigger]="false" #menu1>
+          <button mat-menu-item routerLink='profile'>
+            <mat-icon class="material-icons">person_outline</mat-icon>Profile</button>
+          <button mat-menu-item (click)="auth.logout()">
+            <mat-icon class="material-icons">power_settings_new</mat-icon>Logout account</button>
+        </mat-menu>
+      </div>
     </div>
+
+    <!-- show this only when user not logged in -->
     <ng-template #showLogin>
-      <button mat-button (click)="auth.login()">Login with Google</button>
+      <button mat-raised-button color="primary" (click)="openLoginDialog()">Login </button>
     </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>
+<mat-drawer-container class="example-container" >
+  <mat-drawer #drawer mode="side" >
+    <mat-nav-list>
+      <a mat-list-item routerLink='/blog'><mat-icon class="material-icons">home</mat-icon>&nbsp; Home</a>
+      <a *ngIf="auth.afAuth.authState | async" mat-list-item routerLink='/dashboard' > <mat-icon class="material-icons">launch </mat-icon> &nbsp;Create post</a>
+      <a mat-list-item routerLink='/profile'><mat-icon class="material-icons">info_outline</mat-icon> &nbsp; About US</a>
+    </mat-nav-list>
+  </mat-drawer>
+  <div  (click) ="drawer.close()">
+      <router-outlet> </router-outlet>
+  </div>
+  
+</mat-drawer-container>
