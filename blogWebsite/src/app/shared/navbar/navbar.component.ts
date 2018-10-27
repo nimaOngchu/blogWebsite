@@ -20,7 +20,8 @@ export class NavbarComponent implements OnInit {
   openLoginDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
       panelClass: 'app-full-bleed-dialog',
-      width: '350px',
+      width: '300px',
+      height: '450px',
       data: {name: 'this.name', animal: 'this.animal'}
     });
   }

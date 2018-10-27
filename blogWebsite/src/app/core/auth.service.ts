@@ -20,9 +20,15 @@ export class AuthService {
     return this.Authenticated ? this.authState.uid : null;
   }
 
-  login() {
+  login(provider: string) {
+    if (provider === 'google') {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+   } else if (provider === 'facebook') {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+   } else if (provider === 'email') {
+    
   }
+}
 
   logout() {
     this.afAuth.auth.signOut();

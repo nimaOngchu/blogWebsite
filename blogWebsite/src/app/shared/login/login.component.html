@@ -1,36 +1,67 @@
-<!-- <mat-toolbar color="primary">
-  <mat-toolbar-row class="row">
-    <button mat-raised-button>Login</button>
-    <button mat-raised-button>Register</button>
-  </mat-toolbar-row>
-</mat-toolbar> -->
+
 <div class="displayGrid">
-  <a class="active">Login</a>
-  <a class="gridContent">Register</a>
+  <a [ngClass]="{'active' : loginActive}" (click) = "openLogin()">Login</a>
+  <a class="gridContent" (click)= "openRegistration()"  [ngClass]="{'active' : !loginActive}">Register</a>
 </div>
 <br>
-<div class="loginContainer">
-  <img src="https://us.123rf.com/450wm/arhimicrostok/arhimicrostok1709/arhimicrostok170902578/86987065-stock-vector-user-login-or-authenticate-icon-flat-design-style-.jpg?ver=6"
+<!-- Login Form -->
+<div class="lgoinRegisterContainer" *ngIf=loginActive>
+
+  <img src="https://cdn.pixabay.com/photo/2016/11/14/17/39/person-1824144__340.png"
     alt="login logo">
-  <hr>
-  <button mat-raised-button>
-    <mat-icon class="material-icons">email</mat-icon>Google
-  </button>
-  <button mat-raised-button>facebook</button>
-  <hr> OR
+    <br><br>
+<div>
+    <button mat-raised-button (click) = "auth.login('google')" >
+        <mat-icon class="material-icons">email</mat-icon>Google
+      </button>
+      <button mat-raised-button (click) = "auth.login('facebook')">facebook</button>
+</div>
+<br>
+OR<br>
   <form>
     <mat-form-field appearance="legacy">
       <mat-label>Username or email</mat-label>
-      <input matInput placeholder="Placeholder">
+      <input type="email" matInput placeholder="Placeholder">
       <mat-icon matSuffix>perm_identity</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="legacy">
       <mat-label>Password</mat-label>
-      <input matInput placeholder="Placeholder">
+      <input type="password" matInput placeholder="Placeholder">
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
   </form>
+  <br>
+ 
   <button mat-raised-button>Login</button>
-  <br>
-  <br>
+  
 </div>
+
+<!-- Registration Form -->
+<ng-template [ngIf]="!loginActive" #registration>
+  <div class ="lgoinRegisterContainer">
+
+      <img src="https://cdn.pixabay.com/photo/2017/08/16/00/29/add-person-2646097__340.png"
+      alt="register logo">
+      <br><br>
+      <form>
+          <mat-form-field appearance="legacy">
+            <mat-label>Name</mat-label>
+            <input  matInput placeholder="Enter your Name here">
+            <mat-icon matSuffix>perm_identity</mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="legacy">
+              <mat-label>email</mat-label>
+              <input type="email" matInput placeholder="Enter your email here">
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+          <mat-form-field appearance="legacy">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput placeholder="set your password here">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
+        </form>
+        <br>
+        <button mat-raised-button>Register</button>
+       
+  </div>
+</ng-template>
